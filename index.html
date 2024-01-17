@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+        <style>
+            #countdown {
+                font-size: 25px;
+                color: black; /* 全体の文字色 */
+            }
+    
+            .number {
+                font-size: 80px;
+                color: red; /* 数字の色 */
+                font-family: "Dela Gothic One", sans-serif;
+            }
+        </style>
+        <script>
+            // カウントダウン関数
+            function countdown() {
+                // 目標日時の設定（年, 月(0-11), 日, 時, 分, 秒）
+                var targetDate = new Date(2025, 1, 26, 0, 0, 0); // 2025年2月26日の0時0分0秒
+    
+                // 現在の日時を取得
+                var currentDate = new Date();
+    
+                // 目標日時と現在日時の差を計算（ミリ秒単位）
+                var timeDifference = targetDate.getTime() - currentDate.getTime();
+    
+                if (timeDifference > 0) {
+                    // 残り日数、時間、分、秒を計算
+                    var daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                    var hoursRemaining = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutesRemaining = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                    var secondsRemaining = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    
+                    // カウントダウン表示
+                    document.getElementById("countdown").innerHTML = "" +
+                        "<span class='number'>" + daysRemaining + "</span>日" +
+                        "<span class='number'>" + hoursRemaining + "</span>時間" +
+                        "<span class='number'>" + minutesRemaining + "</span>分" +
+                        "<span class='number'>" + secondsRemaining + "</span>秒";
+                } else {
+                    // カウントダウン非表示、当日表示
+                    document.getElementById("countdown").style.display = "none";
+                    document.getElementById("today").style.display = "block";
+                }
+            }
+    
+            // ページが読み込まれた時にカウントダウン関数を実行
+            window.onload = function () {
+                countdown();
+            };
+    
+            // 1秒ごとにカウントダウン関数を実行
+            setInterval(countdown, 1000);
+        </script>
+    </head>    
+    <body>
+        <h2 style="font-size: 280%;">2024年度埼玉県公立高校入試まであと</h2>
+        <p align="center" id="countdown"></p>
+        <p align="center" id="today" style="display: none;">もう0日...</p>
+        <h3 align="center" style="color:chocolate">※筆記試験は2025年2月26日、実技検査と面接は2月27日、合格発表は3月6日。そのため、今回は筆記試験までのカウントダウンとしています。</h3>
+    </body>
+</html>
